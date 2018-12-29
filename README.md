@@ -1,7 +1,7 @@
 # anagrammer
 simple anagram finder for american words
 
-to run just do python3 do_the_anagram.py --help:
+to run just do:
 
 ```
 > python3 do_the_anagram.py --help
