@@ -1,5 +1,6 @@
-import click
 from itertools import permutations
+
+import click
 
 __author__ = 'acushner'
 
@@ -14,7 +15,7 @@ def do_the_anagram(num_letters, word, full, together, min_num_letters):
     fn = f'./words_{"sml"[min(full, 2)]}.txt'
 
     with open(fn) as f:
-        words = {l.strip().lower() for l in f}
+        words = {tuple(l.strip().lower()) for l in f}
 
     r = range(min_num_letters, len(word) + 1)
     if num_letters:
@@ -28,17 +29,16 @@ def do_the_anagram(num_letters, word, full, together, min_num_letters):
     for n in r:
         p('=================')
         p(n)
-        perms = (''.join(p) for p in permutations(word, n))
-        curr = {w for w in perms if w in words}
+        curr = {w for w in permutations(word, n) if w in words}
         res.update(curr)
-        p('\n'.join(sorted(curr)))
+        p('\n'.join(sorted(''.join(w) for w in curr)))
         p(n)
         p('=================')
         p()
 
     if together:
         print('=================')
-        print('\n'.join(sorted(res)))
+        p('\n'.join(sorted(''.join(w) for w in res)))
         print('=================')
 
 
